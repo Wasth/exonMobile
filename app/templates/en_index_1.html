@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="Content-type" content="text/html; charset=utf-8">
     <title>Corporate citizenship and community investments</title>
-    <link href="{{ url_for('static', filename='styles.css') }}" rel="stylesheet">
+    <link href="{{ url_for('static', filename='style.css') }}" rel="stylesheet">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
           integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 </head>
@@ -12,17 +12,17 @@
 <main class="main-content">
     <section class="formModule">
         <div class="container mt-3">
-            <div class="formModule--intro">
-                <h2 class="formModule--title">Corporate citizenship and community investments</h2>
-                <div class="formModule--separator"></div>
-                <span class="formModule--description p"></span>
+            <div class="header-body">
+                <h2 class="header-title">Corporate citizenship and community investments</h2>
+            </div>
+            <div class="formModule--separator">
             </div>
             <div class="formModule--form">
                 <h4>Contact information</h4>
-                <form action="{{ url_for('action') }}" method="post" novalidate>
+                <form action="">
                     <div class="formModule--section">
                         <label for="IndividualTaxNumber">Individual Tax Number</label>
-                        <input type="text" id="IndividualTaxNumber" name="IndividualTaxNumber" maxlength="12">
+                        <input type="text" id="IndividualTaxNumber" maxlength="12">
                     </div>
                     <div class="formModule--section">
                         <label for="TypeOfEntity">Type of entity</label>
@@ -33,18 +33,14 @@
                         <input type="text" id="CompanyName">
                     </div>
                     <div class="formModule--section">
-                        <label for="AddressLegal">Address(legal)</label>
-                        <input type="text" id="AddressLegal">
-                    </div>
-                    <div class="formModule--section">
-                        <label for="AddressActual">Address(actual)</label>
-                        <input type="text" id="AddressActual">
+                        <label for="Address">Address</label>
+                        <input type="text" id="Address">
                     </div>
                     <div class="formModule--section">
                         <label for="CountryOfIncorporation">Country of Incorporation</label>
-                        <div class="">
+                        <div class="dropdown dropdown-select">
                             <select name="CountryOfIncorporationName" id="CountryOfIncorporation">
-                                <option value="0">Select one</option>
+                                <option value="Select one">Select one</option>
                             </select>
                         </div>
                     </div>
@@ -63,7 +59,7 @@
                     <div class="formModule--section">
                         <label for="PrimaryEMail" id="PrimaryEMailLabel">Primary E-mail</label>
                         <input type="email" id="PrimaryEMail" required>
-                        <span class="field-validation-error" id="invalidPrimaryEmail"></span>
+                        <span id="invalidPrimaryEmail"></span>
                     </div>
                     <div class="formModule--section">
                         <label for="SecondaryContactName">Secondary Name</label>
@@ -105,33 +101,29 @@
                     </div>
                     <div class="formModule--section">
                         <label for="GoodsServicesComments">Goods&Services Comments</label>
-                        <textarea name="GoodsServicesCommentsName" id="GoodsServicesComments" cols="1"
-                                  rows="5"></textarea>
+                        <textarea name="GoodsServicesCommentsName" id="GoodsServicesComments" cols="1" rows="5"></textarea>
                     </div>
                     <div class="formModule--section">
                         <label for="GoodsServicesList">Goods&Services from the list</label>
-                        <div class="">
-                            <select class="" name="GoodsServicesListName" id="GoodsServicesList">
-                                <option value="0">Select one</option>
+                        <div class="dropdown dropdown-select">
+                            <select name="GoodsServicesListName" id="GoodsServicesList">
+                                <option value="Select one">Select one</option>
                             </select>
                         </div>
                     </div>
                     <div class="formModule--section">
                         <label for="ServiceAreaAvailable">Service Area Available</label>
-                        <div class="">
+                        <div class="dropdown dropdown-select">
                             <select name="ServiceAreaAvailableName" id="ServiceAreaAvailable">
-                                <option value="0">Select one</option>
+                                <option value="Select one">Select one</option>
                             </select>
                         </div>
                     </div>
                     <div class="formModule--section">
                         <label for="AnnualCashflow">Annual cashflow</label>
-                        <div class="">
+                        <div class="dropdown dropdown-select">
                             <select name="AnnualCashflowName" id="AnnualCashflow">
-                                <option value="0">Select one</option>
-                                <option value="1">Less than 1 million$</option>
-                                <option value="2">From 1 to 50 million$</option>
-                                <option value="3">More than 50 million$</option>
+                                <option value="Select one">Select one</option>
                             </select>
                         </div>
                     </div>
@@ -153,8 +145,11 @@
             $('#PrimaryEMail').css("border-left", "3px solid #d5000a");
             $('#PrimaryEMailLabel').css("color", "#d5000a")
         } else {
+            console.log(email.length);
             console.log('valid');
-            alert('Вы ввели корректный e-mail!');
+            document.getElementById('invalidPrimaryEmail').innerHTML = '';
+            $('#PrimaryEMail').css("border-left", "");
+            $('#PrimaryEMailLabel').css("color", "#6d6e71")
         }
     });
     $("#PrimaryContactPhone").keypress(function (event) {

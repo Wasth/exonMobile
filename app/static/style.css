@@ -307,3 +307,24 @@ textarea {
     padding-left: 30px;
     color: inherit;
 }
+
+.formModule--separator {
+    margin: 40px 0;
+    height: 3px;
+}
+
+.formModule--separator {
+    position: relative;
+}
+
+.formModule--separator:before {
+    width: 100%;
+}
+
+.formModule--separator:before {
+    position: absolute;
+    bottom: 0;
+    content: "";
+    border-bottom: 3px solid #d1d3d4;
+    width: calc(100% - 20px);
+}

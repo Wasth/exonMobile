@@ -3,126 +3,150 @@
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="Content-type" content="text/html; charset=utf-8">
-    <title>Corporate citizenship and community investments</title>
-    <link href="{{ url_for('static', filename='style.css') }}" rel="stylesheet">
+    <title>Корпоративное гражданство и общинные инвестиции</title>
+    <link href="{{ url_for('static', filename='styles.css') }}" rel="stylesheet">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
           integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 </head>
 <body>
 <main class="main-content">
     <section class="formModule">
+        {% with messages = get_flashed_messages() %}
+            {% if messages %}
+                {% for message in messages %}
+                    <div class="alert alert-success alert-dismissible fade show" role="alert">
+                        {{ message }}
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                {% endfor %}
+
+            {% endif %}
+        {% endwith %}
         <div class="container mt-3">
-            <div class="header-body">
-                <h2 class="header-title">Corporate citizenship and community investments</h2>
+            <div class="formModule--intro">
+                <h2 class="formModule--title">Корпоративное гражданство и общинные инвестиции</h2>
+                <div class="formModule--separator"></div>
+                <span class="formModule--description p"></span>
             </div>
-            <hr>
-            <div class="formModuleForm">
-                <h4>Contact information</h4>
-                <form action="">
+            <div class="formModule--form">
+                <h4>Контактная информация</h4>
+                <form action="{{ url_for('action') }}" method="post" novalidate>
                     <div class="formModule--section">
-                        <label for="IndividualTaxNumber">Individual Tax Number</label>
-                        <input type="text" id="IndividualTaxNumber" maxlength="12">
+                        <label for="IndividualTaxNumber">Идентификационный номер</label>
+                        <input type="text" id="IndividualTaxNumber" name="IndividualTaxNumber" placeholder="ИНН" maxlength="12">
                     </div>
                     <div class="formModule--section">
-                        <label for="TypeOfEntity">Type of entity</label>
+                        <label for="TypeOfEntity">Организационно-правовая форма</label>
                         <input type="text" id="TypeOfEntity">
                     </div>
                     <div class="formModule--section">
-                        <label for="CompanyName">Company Name</label>
+                        <label for="CompanyName">Название компании</label>
                         <input type="text" id="CompanyName">
                     </div>
                     <div class="formModule--section">
-                        <label for="Address">Address</label>
-                        <input type="text" id="Address">
+                        <label for="AddressLegal">Юридический адрес</label>
+                        <input type="text" id="AddressLegal">
                     </div>
                     <div class="formModule--section">
-                        <label for="CountryOfIncorporation">Country of Incorporation</label>
+                        <label for="AddressActual">Фактический адрес</label>
+                        <input type="text" id="AddressActual">
+                    </div>
+                    <div class="formModule--section">
+                        <label for="CountryOfIncorporation">Страна регистрации</label>
                         <div class="dropdown dropdown-select">
                             <select name="CountryOfIncorporationName" id="CountryOfIncorporation">
-                                <option value="Select one">Select one</option>
+                                <option value="0">Выберите одно</option>
                             </select>
                         </div>
                     </div>
                     <div class="formModule--section">
-                        <label for="PrimaryContactName">Primary Name</label>
+                        <label for="PrimaryContactName">Имя основного контакта</label>
                         <input type="text" id="PrimaryContactName">
                     </div>
                     <div class="formModule--section">
-                        <label for="PrimaryJobTitle">Primary Job Title</label>
+                        <label for="PrimaryJobTitle">Должность основного контакта</label>
                         <input type="text" id="PrimaryJobTitle">
                     </div>
                     <div class="formModule--section">
-                        <label for="PrimaryContactPhone">Primary Phone</label>
+                        <label for="PrimaryContactPhone">Телефон основного контакта</label>
                         <input type="number" id="PrimaryContactPhone">
                     </div>
                     <div class="formModule--section">
-                        <label for="PrimaryEMail" id="PrimaryEMailLabel">Primary E-mail</label>
+                        <label for="PrimaryEMail" id="PrimaryEMailLabel">Электронный адрес основного контакта</label>
                         <input type="email" id="PrimaryEMail" required>
-                        <span id="invalidPrimaryEmail"></span>
+                        <span class="field-validation-error" id="invalidPrimaryEmail"></span>
                     </div>
                     <div class="formModule--section">
-                        <label for="SecondaryContactName">Secondary Name</label>
+                        <label for="SecondaryContactName">Имя дополнительного контакта</label>
                         <input type="text" id="SecondaryContactName">
                     </div>
                     <div class="formModule--section">
-                        <label for="SecondaryJobTitle">Secondary Job Title</label>
+                        <label for="SecondaryJobTitle">Должность дополнительного контакта</label>
                         <input type="text" id="SecondaryJobTitle">
                     </div>
                     <div class="formModule--section">
-                        <label for="SecondaryContactPhone">Secondary Phone</label>
+                        <label for="SecondaryContactPhone">Телефон дополнительного контакта</label>
                         <input type="number" id="SecondaryContactPhone">
                     </div>
                     <div class="formModule--section">
-                        <label for="SecondaryEMail">Secondary E-mail</label>
+                        <label for="SecondaryEMail">Электронный адрес дополнительного контакта</label>
                         <input type="email" id="SecondaryEMail" required>
                         <span id="invalidSecondaryEmail"></span>
                     </div>
                     <div class="formModule--section">
-                        <label for="RussianGovernment">Russian Government
-                            Ownership %</label>
+                        <label for="RussianGovernment">Доля государственной
+                            собственности в %</label>
                         <input type="number" id="RussianGovernment" maxlength="3">
                     </div>
                     <div class="formModule--section">
-                        <label for="RussiansCitizens">Russians Citizens Ownership %</label>
+                        <label for="RussiansCitizens">Доля собственности граждан РФ в %</label>
                         <input type="number" id="RussiansCitizens" maxlength="3">
                     </div>
                     <div class="formModule--section">
-                        <label for="OtherRussianLegalEntity">Other Russian Legal Entity Ownership %</label>
+                        <label for="OtherRussianLegalEntity">Доля собственности
+                            юридических лиц РФ в %</label>
                         <input type="number" id="OtherRussianLegalEntity" maxlength="3">
                     </div>
                     <div class="formModule--section">
-                        <label for="TotalRussian">Total Russian Ownership %</label>
+                        <label for="TotalRussian">Итого РФ собственности в %</label>
                         <input type="number" id="TotalRussian" maxlength="3">
                     </div>
                     <div class="formModule--section">
-                        <label for="Website">Website</label>
+                        <label for="Website">Домашняя страница</label>
                         <input type="text" id="Website" value="http://">
                     </div>
                     <div class="formModule--section">
-                        <label for="GoodsServicesComments">Goods&Services Comments</label>
-                        <textarea name="GoodsServicesCommentsName" id="GoodsServicesComments" cols="1" rows="5"></textarea>
+                        <label for="GoodsServicesComments">Комментарии по видам
+                            деятельности</label>
+                        <textarea name="GoodsServicesCommentsName" id="GoodsServicesComments" cols="1"
+                                  rows="5"></textarea>
                     </div>
                     <div class="formModule--section">
-                        <label for="GoodsServicesList">Goods&Services from the list</label>
-                        <div class="dropdown dropdown-select">
-                            <select name="GoodsServicesListName" id="GoodsServicesList">
-                                <option value="Select one">Select one</option>
+                        <label for="GoodsServicesList">Справочник видов деятельности</label>
+                        <div class="">
+                            <select class="" name="GoodsServicesListName" id="GoodsServicesList">
+                                <option value="0">Выберите одно</option>
                             </select>
                         </div>
                     </div>
                     <div class="formModule--section">
-                        <label for="ServiceAreaAvailable">Service Area Available</label>
-                        <div class="dropdown dropdown-select">
+                        <label for="ServiceAreaAvailable">Область доступности услуг</label>
+                        <div class="">
                             <select name="ServiceAreaAvailableName" id="ServiceAreaAvailable">
-                                <option value="Select one">Select one</option>
+                                <option value="0">Выберите одно</option>
                             </select>
                         </div>
                     </div>
                     <div class="formModule--section">
-                        <label for="AnnualCashflow">Annual cashflow</label>
-                        <div class="dropdown dropdown-select">
+                        <label for="AnnualCashflow">Годовой финансовый оборот</label>
+                        <div class="">
                             <select name="AnnualCashflowName" id="AnnualCashflow">
-                                <option value="Select one">Select one</option>
+                                <option value="0">Выберите одно</option>
+                                <option value="1">Менее 1 млн$</option>
+                                <option value="2">От 1 до 50 млн$</option>
+                                <option value="3">Более 50 млн$</option>
                             </select>
                         </div>
                     </div>
