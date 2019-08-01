@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="Content-type" content="text/html; charset=utf-8">
+    <title>Corporate citizenship and community investments</title>
+    <link href="{{ url_for('static', filename='style.css') }}" rel="stylesheet">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+          integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+</head>
+<body>
+<main class="main-content">
+    <section class="formModule">
+        <div class="container mt-3">
+            <div class="header-body">
+                <h2 class="header-title">Corporate citizenship and community investments</h2>
+            </div>
+            <hr>
+            <div class="formModuleForm">
+                <h4>Contact information</h4>
+                <form action="">
+                    <div class="formModule--section">
+                        <label for="IndividualTaxNumber">Individual Tax Number</label>
+                        <input type="text" id="IndividualTaxNumber" maxlength="12">
+                    </div>
+                    <div class="formModule--section">
+                        <label for="TypeOfEntity">Type of entity</label>
+                        <input type="text" id="TypeOfEntity">
+                    </div>
+                    <div class="formModule--section">
+                        <label for="CompanyName">Company Name</label>
+                        <input type="text" id="CompanyName">
+                    </div>
+                    <div class="formModule--section">
+                        <label for="Address">Address</label>
+                        <input type="text" id="Address">
+                    </div>
+                    <div class="formModule--section">
+                        <label for="CountryOfIncorporation">Country of Incorporation</label>
+                        <div class="dropdown dropdown-select">
+                            <select name="CountryOfIncorporationName" id="CountryOfIncorporation">
+                                <option value="Select one">Select one</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="formModule--section">
+                        <label for="PrimaryContactName">Primary Name</label>
+                        <input type="text" id="PrimaryContactName">
+                    </div>
+                    <div class="formModule--section">
+                        <label for="PrimaryJobTitle">Primary Job Title</label>
+                        <input type="text" id="PrimaryJobTitle">
+                    </div>
+                    <div class="formModule--section">
+                        <label for="PrimaryContactPhone">Primary Phone</label>
+                        <input type="number" id="PrimaryContactPhone">
+                    </div>
+                    <div class="formModule--section">
+                        <label for="PrimaryEMail" id="PrimaryEMailLabel">Primary E-mail</label>
+                        <input type="email" id="PrimaryEMail" required>
+                        <span id="invalidPrimaryEmail"></span>
+                    </div>
+                    <div class="formModule--section">
+                        <label for="SecondaryContactName">Secondary Name</label>
+                        <input type="text" id="SecondaryContactName">
+                    </div>
+                    <div class="formModule--section">
+                        <label for="SecondaryJobTitle">Secondary Job Title</label>
+                        <input type="text" id="SecondaryJobTitle">
+                    </div>
+                    <div class="formModule--section">
+                        <label for="SecondaryContactPhone">Secondary Phone</label>
+                        <input type="number" id="SecondaryContactPhone">
+                    </div>
+                    <div class="formModule--section">
+                        <label for="SecondaryEMail">Secondary E-mail</label>
+                        <input type="email" id="SecondaryEMail" required>
+                        <span id="invalidSecondaryEmail"></span>
+                    </div>
+                    <div class="formModule--section">
+                        <label for="RussianGovernment">Russian Government
+                            Ownership %</label>
+                        <input type="number" id="RussianGovernment" maxlength="3">
+                    </div>
+                    <div class="formModule--section">
+                        <label for="RussiansCitizens">Russians Citizens Ownership %</label>
+                        <input type="number" id="RussiansCitizens" maxlength="3">
+                    </div>
+                    <div class="formModule--section">
+                        <label for="OtherRussianLegalEntity">Other Russian Legal Entity Ownership %</label>
+                        <input type="number" id="OtherRussianLegalEntity" maxlength="3">
+                    </div>
+                    <div class="formModule--section">
+                        <label for="TotalRussian">Total Russian Ownership %</label>
+                        <input type="number" id="TotalRussian" maxlength="3">
+                    </div>
+                    <div class="formModule--section">
+                        <label for="Website">Website</label>
+                        <input type="text" id="Website" value="http://">
+                    </div>
+                    <div class="formModule--section">
+                        <label for="GoodsServicesComments">Goods&Services Comments</label>
+                        <textarea name="GoodsServicesCommentsName" id="GoodsServicesComments" cols="1" rows="5"></textarea>
+                    </div>
+                    <div class="formModule--section">
+                        <label for="GoodsServicesList">Goods&Services from the list</label>
+                        <div class="dropdown dropdown-select">
+                            <select name="GoodsServicesListName" id="GoodsServicesList">
+                                <option value="Select one">Select one</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="formModule--section">
+                        <label for="ServiceAreaAvailable">Service Area Available</label>
+                        <div class="dropdown dropdown-select">
+                            <select name="ServiceAreaAvailableName" id="ServiceAreaAvailable">
+                                <option value="Select one">Select one</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="formModule--section">
+                        <label for="AnnualCashflow">Annual cashflow</label>
+                        <div class="dropdown dropdown-select">
+                            <select name="AnnualCashflowName" id="AnnualCashflow">
+                                <option value="Select one">Select one</option>
+                            </select>
+                        </div>
+                    </div>
+                    <button class="button">Submit</button>
+                </form>
+            </div>
+        </div>
+    </section>
+</main>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<script>
+    $('#PrimaryEMail').on('blur', function () {
+        let email = $(this).val();
+        let text = 'Please enter a valid email address.';
+        if (email.length > 0
+            && (email.match(/.+?\@.+/g) || []).length !== 1) {
+            console.log('invalid');
+            document.getElementById('invalidPrimaryEmail').innerHTML = text;
+            $('#PrimaryEMail').css("border-left", "3px solid #d5000a");
+            $('#PrimaryEMailLabel').css("color", "#d5000a")
+        } else {
+            console.log('valid');
+            alert('Вы ввели корректный e-mail!');
+        }
+    });
+    $("#PrimaryContactPhone").keypress(function (event) {
+        event = event || window.event;
+        if (event.charCode && event.charCode != 0 && event.charCode != 46 && (event.charCode < 48 || event.charCode > 57))
+            return false;
+    });
+    $("#SecondaryContactPhone").keypress(function (event) {
+        event = event || window.event;
+        if (event.charCode && event.charCode != 0 && event.charCode != 46 && (event.charCode < 48 || event.charCode > 57))
+            return false;
+    });
+</script>
+</body>
+</html>

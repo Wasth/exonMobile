@@ -56,7 +56,7 @@
                         <input type="number" id="PrimaryContactPhone">
                     </div>
                     <div class="formModule--section">
-                        <label for="PrimaryEMail">Primary E-mail</label>
+                        <label for="PrimaryEMail" id="PrimaryEMailLabel">Primary E-mail</label>
                         <input type="email" id="PrimaryEMail" required>
                         <span id="invalidPrimaryEmail"></span>
                     </div>
@@ -142,6 +142,7 @@
             console.log('invalid');
             document.getElementById('invalidPrimaryEmail').innerHTML = text;
             $('#PrimaryEMail').css("border-left", "3px solid #d5000a");
+            $('#PrimaryEMailLabel').css("color", "#d5000a")
         } else {
             console.log('valid');
             alert('Вы ввели корректный e-mail!');
