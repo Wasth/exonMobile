@@ -54,6 +54,42 @@
                 <h4>Contact information</h4>
                 <form action="{{ url_for('action') }}" method="post" novalidate>
                     <div class="formModule--section">
+                        <label for="PrimaryContactName">Name</label>
+                        <input type="text" name="PrimaryContactName" id="PrimaryContactName">
+                    </div>
+                    <div class="formModule--section">
+                        <label for="PrimaryJobTitle">Job Title</label>
+                        <input type="text" name="PrimaryJobTitle" id="PrimaryJobTitle">
+                    </div>
+                    <div class="formModule--section">
+                        <label for="PrimaryContactPhone">Phone</label>
+                        <input type="number" name="PrimaryContactPhone" id="PrimaryContactPhone">
+                    </div>
+                    <div class="formModule--section">
+                        <label for="PrimaryEMail" id="PrimaryEMailLabel">E-mail</label>
+                        <input type="email" id="PrimaryEMail" required>
+                        <span class="field-validation-error" id="invalidPrimaryEmail"></span>
+                    </div>
+                    <h4>Secondary contact information</h4>
+                    <div class="formModule--section">
+                        <label for="SecondaryContactName">Name</label>
+                        <input type="text" name="SecondaryContactName" id="SecondaryContactName">
+                    </div>
+                    <div class="formModule--section">
+                        <label for="SecondaryJobTitle">Job Title</label>
+                        <input type="text" name="SecondaryJobTitle" id="SecondaryJobTitle">
+                    </div>
+                    <div class="formModule--section">
+                        <label for="SecondaryContactPhone">Phone</label>
+                        <input type="number" name="SecondaryContactPhone" id="SecondaryContactPhone">
+                    </div>
+                    <div class="formModule--section">
+                        <label for="SecondaryEMail">E-mail</label>
+                        <input type="email" id="SecondaryEMail" required>
+                        <span id="invalidSecondaryEmail"></span>
+                    </div>
+                    <h4>Company information</h4>
+                    <div class="formModule--section">
                         <label for="IndividualTaxNumber">Individual Tax Number</label>
                         <input type="text" id="IndividualTaxNumber" name="IndividualTaxNumber" maxlength="12">
                     </div>
@@ -76,7 +112,8 @@
                     <div class="formModule--section">
                         <label for="CountryOfIncorporation">Country of Incorporation</label>
                         <div class="dropdown dropdown-select">
-                            <select name="CountryOfIncorporationName" onclick="selectCountryOfIncorporation()" id="CountryOfIncorporation">
+                            <select name="CountryOfIncorporationName" onclick="selectCountryOfIncorporation()"
+                                    id="CountryOfIncorporation">
                                 <option value="Select country">Select country</option>
                                 <option value="Afghanistan">Afghanistan</option>
                                 <option value="Aland Islands">Aland Islands</option>
@@ -327,40 +364,6 @@
                                                              class="dropdown-select-selected">Select country</span>
                             </p>
                         </div>
-                    </div>
-                    <div class="formModule--section">
-                        <label for="PrimaryContactName">Primary Name</label>
-                        <input type="text" name="PrimaryContactName" id="PrimaryContactName">
-                    </div>
-                    <div class="formModule--section">
-                        <label for="PrimaryJobTitle">Primary Job Title</label>
-                        <input type="text" name="PrimaryJobTitle" id="PrimaryJobTitle">
-                    </div>
-                    <div class="formModule--section">
-                        <label for="PrimaryContactPhone">Primary Phone</label>
-                        <input type="number" name="PrimaryContactPhone" id="PrimaryContactPhone">
-                    </div>
-                    <div class="formModule--section">
-                        <label for="PrimaryEMail" id="PrimaryEMailLabel">Primary E-mail</label>
-                        <input type="email" id="PrimaryEMail" required>
-                        <span class="field-validation-error" id="invalidPrimaryEmail"></span>
-                    </div>
-                    <div class="formModule--section">
-                        <label for="SecondaryContactName">Secondary Name</label>
-                        <input type="text" name="SecondaryContactName" id="SecondaryContactName">
-                    </div>
-                    <div class="formModule--section">
-                        <label for="SecondaryJobTitle">Secondary Job Title</label>
-                        <input type="text" name="SecondaryJobTitle" id="SecondaryJobTitle">
-                    </div>
-                    <div class="formModule--section">
-                        <label for="SecondaryContactPhone">Secondary Phone</label>
-                        <input type="number" name="SecondaryContactPhone" id="SecondaryContactPhone">
-                    </div>
-                    <div class="formModule--section">
-                        <label for="SecondaryEMail">Secondary E-mail</label>
-                        <input type="email" id="SecondaryEMail" required>
-                        <span id="invalidSecondaryEmail"></span>
                     </div>
                     <div class="formModule--section">
                         <label for="RussianGovernment">Russian Government

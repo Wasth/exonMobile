@@ -361,8 +361,10 @@
                                 <option value="Zambia">Zambia</option>
                                 <option value="Zimbabwe">Zimbabwe</option>
                             </select>
-                            <p class="dropdown--title"><span id="CountryOfIncorporationSpan"
-                                                             class="dropdown-select-selected">Выберите страну</span></p>
+                            <p class="dropdown--title">
+                                <span id="CountryOfIncorporationSpan"
+                                      class="dropdown-select-selected">Выберите страну</span>
+                            </p>
                         </div>
                     </div>
                     <div class="formModule--section">
@@ -396,17 +398,59 @@
                     <div class="formModule--section">
                         <label for="GoodsServicesList">Справочник видов деятельности</label>
                         <div class="dropdown dropdown-select">
-                            <select class="" name="GoodsServicesListName" id="GoodsServicesList">
+                            <select class="" name="GoodsServicesListName" onclick="selectGoodsServicesList()"
+                                    id="GoodsServicesList">
+                                <option value="0">Выберите одно</option>
+                                <option value="A">Сельское, лесное хозяйство, охота, рыболовство и рыбоводство</option>
+                                <option value="B">Добыча полезных ископаемых</option>
+                                <option value="C">Обрабатывающие производства</option>
+                                <option value="D">Обеспечение электрической энергией, газом и паром; кондиционирование
+                                    воздуха
+                                </option>
+                                <option value="E">Водоснабжение; водоотведение, организация сбора и утилизации отходов,
+                                    деятельность по ликвидации загрязнений
+                                </option>
+                                <option value="F">Строительство</option>
+                                <option value="G">Торговля оптовая и розничная; ремонт автотранспортных средств и
+                                    мотоциклов
+                                </option>
+                                <option value="H">Транспортировка и хранение</option>
+                                <option value="I">Деятельность гостиниц и предприятий общественного питания</option>
+                                <option value="J">Деятельность в области информации и связи</option>
+                                <option value="K">Деятельность финансовая и страховая</option>
+                                <option value="L">Деятельность по операциям с недвижимым имуществом</option>
+                                <option value="M">Деятельность профессиональная, научная и техническая</option>
+                                <option value="N">Деятельность административная и сопутствующие дополнительные услуги
+                                </option>
+                                <option value="O">Государственное управление и обеспечение военной безопасности;
+                                    социальное обеспечение
+                                </option>
+                                <option value="P">Образование</option>
+                                <option value="Q">Деятельность в области здравоохранения и социальных услуг</option>
+                                <option value="R">Деятельность в области культуры, спорта, организации досуга и
+                                    развлечений
+                                </option>
+                                <option value="S">Предоставление прочих видов услуг</option>
+                                <option value="T">Деятельность домашних хозяйств как работодателей; недифференцированная
+                                    деятельность частных домашних хозяйств по производству товаров и оказанию услуг для
+                                    собственного потребления
+                                </option>
                             </select>
-                            <p class="dropdown--title"><span class="dropdown-select-selected">Select one</span></p>
+                            <p class="dropdown--title"><span id="GoodsServicesListSpan"
+                                                             class="dropdown-select-selected">Выберите одно</span></p>
                         </div>
                     </div>
                     <div class="formModule--section">
                         <label for="ServiceAreaAvailable">Область доступности услуг</label>
                         <div class="dropdown dropdown-select">
-                            <select name="ServiceAreaAvailableName" id="ServiceAreaAvailable">
+                            <select name="ServiceAreaAvailableName" onclick="selectServiceAreaAvailable()" id="ServiceAreaAvailable">
+                                <option value="0">Выберите одно</option>
+                                <option value="1">Сахалин</option>
+                                <option value="3">Дальний Восток России</option>
+                                <option value="4">Другие регионы России</option>
+                                <option value="5">За рубежом</option>
                             </select>
-                            <p class="dropdown--title"><span class="dropdown-select-selected">Select one</span></p>
+                            <p class="dropdown--title"><span id="ServiceAreaAvailableSpan" class="dropdown-select-selected">Выберите одно</span></p>
                         </div>
                     </div>
                     <div class="formModule--section">
@@ -430,7 +474,7 @@
 </main>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 <script>
-    let click = 0;
+    let clickAC = 0, clickCOI = 0, clickGS = 0, clickSAA = 0;
     $('#PrimaryEMail').on('blur', function () {
         let email = $(this).val();
         let text = 'Please enter a valid email address.';
@@ -448,21 +492,41 @@
 
     function selectAnnualCashflow() {
         let chceck = $('#AnnualCashflow :selected');
-        if (click === 0) {
-            click++;
+        if (clickAC === 0) {
+            clickAC++;
             console.log(chceck.val());
         } else {
-            click--;
+            clickAC--;
             document.getElementById('AnnualCashflowSpan').innerHTML = chceck[0].innerText;
+        }
+    }
+    function selectServiceAreaAvailable() {
+        let chceck = $('#ServiceAreaAvailable :selected');
+        if (clickSAA === 0) {
+            clickSAA++;
+            console.log(chceck.val());
+        } else {
+            clickSAA--;
+            document.getElementById('ServiceAreaAvailableSpan').innerHTML = chceck[0].innerText;
+        }
+    }
+    function selectGoodsServicesList() {
+        let chceck = $('#GoodsServicesList :selected');
+        if (clickGS === 0) {
+            clickGS++;
+            console.log(chceck.val());
+        } else {
+            clickGS--;
+            document.getElementById('GoodsServicesListSpan').innerHTML = chceck[0].innerText;
         }
     }
     function selectCountryOfIncorporation() {
         let chceck = $('#CountryOfIncorporation :selected');
-        if (click === 0) {
-            click++;
+        if (clickCOI === 0) {
+            clickCOI++;
             console.log(chceck.val());
         } else {
-            click--;
+            clickCOI--;
             document.getElementById('CountryOfIncorporationSpan').innerHTML = chceck[0].innerText;
         }
     }
