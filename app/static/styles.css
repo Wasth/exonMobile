@@ -4265,11 +4265,14 @@ ol.no-list-style li:before, ul.no-list-style li:before {
     transition: transform .3s linear;
     transition: transform .3s linear, -webkit-transform .3s linear;
     font-family: exxom;
-    content: "";
+    content: "⮟";
     color: #fe000c;
-    font-size: .5rem;
     position: absolute;
     right: 20px
+}
+
+.dropdown--title:after .active{
+    transform: rotate(180deg);
 }
 
 .dropdown--content {
@@ -16024,7 +16027,53 @@ ol.no-list-style li:before, ul.no-list-style li:before {
     }
 }
 
-a.mainNav--globalSelector-name:hover{
+a.mainNav--globalSelector-name:hover {
     color: #fe000c;
     text-decoration: none;
 }
+
+.rail-select {
+    position: absolute;
+    max-width: 100%;
+}
+
+.rail-select select {
+    -webkit-appearance: none;
+}
+
+.rail-select .select-side {
+    pointer-events: none;
+    width: 40px;
+    position: absolute;
+    top: 0px;
+    height: 100%;
+    left: calc(100% - 40px);
+    border-right: solid 1px #d1d3d4;
+    border-top: solid 1px #d1d3d4;
+    border-bottom: solid 1px #d1d3d4;
+}
+
+.rail-select .select-side:hover {
+    outline: none;
+    box-shadow: none;
+    border-color: #939598
+}
+
+.rail-select .select-side:before {
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    height: 100%;
+    width: 1px;
+}
+
+.rail-select .select-side i {
+    left: 30%;
+    top: 12px;
+}
+
+.rail-select .select-side i.blue {
+    color: #4e7af0;
+}
+
