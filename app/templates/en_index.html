@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="Content-type" content="text/html; charset=utf-8">
-    <title>Corporate citizenship and community investments</title>
+    <title>Registration of potential contractors Exxon Neftegas Limited</title>
     <link href="{{ url_for('static', filename='styles.css') }}" rel="stylesheet">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
           integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
@@ -46,7 +46,8 @@
     <section class="formModule">
         <div class="container mt-3">
             <div class="formModule--intro">
-                <h2 class="formModule--title">Corporate citizenship and community investments</h2>
+                <h2 class="formModule--title">
+                    Registration of potential contractors Exxon Neftegas Limited</h2>
                 <div class="formModule--separator"></div>
                 <span class="formModule--description p"></span>
             </div>
@@ -394,21 +395,73 @@
                     <div class="formModule--section">
                         <label for="GoodsServicesList">Goods&Services from the list</label>
                         <div class="dropdown dropdown-select">
-                            <select class="dropdown dropdown-select" name="GoodsServicesListName"
+                            <select class="dropdown dropdown-select" onclick="selectGoodsServicesList()" name="GoodsServicesListName"
                                     id="GoodsServicesList">
                                 <option value="0">Select one</option>
+                                <option value="A"> Agriculture, forestry, hunting, fishing, and fish farming</option>
+                                                                
+                                <option value="B"> Mining</option>
+                                                                
+                                <option value="C"> Manufacturing</option>
+                                                                
+                                <option value="D"> Supply with electric energy, gas and steam</option>
+                                                                
+                                <option value="E"> Water supply; water disposal, organization of waste collection and
+                                    disposal, pollution abatement activities
+                                </option>
+                                                                
+                                <option value="F"> Building</option>
+                                                                
+                                <option value="G"> Wholesale and retail trade; vehicle repair and motorcycles</option>
+                                                                
+                                <option value="H"> Transportation and storage</option>
+                                                                
+                                <option value="I"> Hotel and food service activities</option>
+                                                                
+                                <option value="J"> Information and communications activities</option>
+                                                                
+                                <option value="K"> Financial and insurance activities</option>
+                                                                
+                                <option value="L"> Real estate business activities</option>
+                                                                
+                                <option value="M"> Professional, scientific, and technical activities</option>
+                                                                
+                                <option value="N"> Administrative activities and related additional services</option>
+                                                                
+                                <option value="O"> Public administration and military security; social Security</option>
+                                                                
+                                <option value="P"> Education</option>
+                                                                
+                                <option value="Q"> Health and social services activities</option>
+                                                                
+                                <option value="R"> Activities in the field of culture, sports, leisure and
+                                    entertainments
+                                </option>
+                                                                
+                                <option value="S"> Providing other types of services</option>
+                                                                
+                                <option value="T"> Household activities as employers; undifferentiated private household
+                                    activities for the production of goods and the provision of services for own
+                                    consumption
+                                </option>
                             </select>
-                            <p class="dropdown--title"><span class="dropdown-select-selected">Select one</span>
+                            <p class="dropdown--title"><span id="GoodsServicesListSpan"
+                                                             class="dropdown-select-selected">Select one</span>
                             </p>
                         </div>
                     </div>
                     <div class="formModule--section">
                         <label for="ServiceAreaAvailable">Service Area Available</label>
                         <div class="dropdown dropdown-select">
-                            <select name="ServiceAreaAvailableName" id="ServiceAreaAvailable">
+                            <select name="ServiceAreaAvailableName" onclick="selectServiceAreaAvailable()" id="ServiceAreaAvailable">
                                 <option value="0">Select one</option>
+                                <option value="1">Sakhalin</option>
+                                <option value="3">Russian Far East</option>
+                                <option value="4">Other regions of Russia</option>
+                                <option value="5">Abroad</option>
                             </select>
-                            <p class="dropdown--title"><span class="dropdown-select-selected">Select one</span>
+                            <p class="dropdown--title"><span id="ServiceAreaAvailableSpan"
+                                                             class="dropdown-select-selected">Select one</span>
                             </p>
                         </div>
                     </div>
@@ -433,7 +486,7 @@
 </main>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 <script>
-    let clickAC = 0, clickCOI = 0;
+    let clickAC = 0, clickCOI = 0, clickGS = 0, clickSAA = 0;
     $('#PrimaryEMail').on('blur', function () {
         let email = $(this).val();
         let text = 'Please enter a valid email address.';
@@ -445,7 +498,6 @@
             $('#PrimaryEMailLabel').css("color", "#d5000a")
         } else {
             console.log('valid');
-            alert('Вы ввели корректный e-mail!');
         }
     });
 
@@ -457,6 +509,28 @@
         } else {
             clickAC--;
             document.getElementById('AnnualCashflowSpan').innerHTML = chceck[0].innerText;
+        }
+    }
+
+    function selectServiceAreaAvailable() {
+        let chceck = $('#ServiceAreaAvailable :selected');
+        if (clickSAA === 0) {
+            clickSAA++;
+            console.log(chceck.val());
+        } else {
+            clickSAA--;
+            document.getElementById('ServiceAreaAvailableSpan').innerHTML = chceck[0].innerText;
+        }
+    }
+
+    function selectGoodsServicesList() {
+        let chceck = $('#GoodsServicesList :selected');
+        if (clickGS === 0) {
+            clickGS++;
+            console.log(chceck.val());
+        } else {
+            clickGS--;
+            document.getElementById('GoodsServicesListSpan').innerHTML = chceck[0].innerText;
         }
     }
 
