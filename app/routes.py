@@ -16,6 +16,8 @@ def ru_index():
 @app.route('/action', methods=['POST'])
 def action():
     ITN = request.form.get('IndividualTaxNumber', None)
+    TOE = request.form.get('TypeOfEntity', None)
+
     flash('Принял')
     print(ITN)
     return redirect(url_for('ru_index'))

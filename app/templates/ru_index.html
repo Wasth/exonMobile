@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ru">
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="Content-type" content="text/html; charset=utf-8">
@@ -9,21 +9,41 @@
           integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 </head>
 <body>
+
+<header class="header-static">
+    <nav class="mainNav mainNav-hidden" data-script="main-nav">
+        <section class="mainNav--wrapper">
+            <div class="container">
+                <div class="mainNav--mobile-button">
+                    <button class="mainNav--mobile-icon" role="button" aria-label="Navigation">
+                        <span></span>
+                    </button>
+                </div>
+
+                <div class="mainNav--logo">
+                    <a href="https://corporate.exxonmobil.com/" class="mainNav--logoLink">
+                        <img src="{{ url_for('static', filename='Icons/exmo_red-268wide.png') }}" alt=""
+                             class="mainNav--logoRed"/>
+                        <img src="{{ url_for('static', filename='Icons/exmo_red-268wide.png') }}" alt=""
+                             class="mainNav--logoWhite"/>
+                    </a>
+                </div>
+                <div class="mainNav--utilities">
+                    <button class="" style="border: transparent"
+                            data-script="global-selector-button" role="button" aria-label="Global Selector">
+                        <a href="{{ url_for('en_index') }}" class="mainNav--globalSelector-name">English</a>
+                    </button>
+                </div>
+            </div>
+            <div class="mainNav--overlay"></div>
+        </section>
+    </nav>
+    <section class="globalSelector" data-script="global-selector" data-string-logo="/Assets/img/exxonmobil-black.png"
+             data-string-alt-logo="Logo"></section>
+</header>
+
 <main class="main-content">
     <section class="formModule">
-        {% with messages = get_flashed_messages() %}
-            {% if messages %}
-                {% for message in messages %}
-                    <div class="alert alert-success alert-dismissible fade show" role="alert">
-                        {{ message }}
-                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                        </button>
-                    </div>
-                {% endfor %}
-
-            {% endif %}
-        {% endwith %}
         <div class="container mt-3">
             <div class="formModule--intro">
                 <h2 class="formModule--title">Корпоративное гражданство и общинные инвестиции</h2>
@@ -35,27 +55,28 @@
                 <form action="{{ url_for('action') }}" method="post" novalidate>
                     <div class="formModule--section">
                         <label for="IndividualTaxNumber">Идентификационный номер</label>
-                        <input type="text" id="IndividualTaxNumber" name="IndividualTaxNumber" placeholder="ИНН" maxlength="12">
+                        <input type="text" id="IndividualTaxNumber" name="IndividualTaxNumber" placeholder="ИНН"
+                               maxlength="12">
                     </div>
                     <div class="formModule--section">
                         <label for="TypeOfEntity">Организационно-правовая форма</label>
-                        <input type="text" id="TypeOfEntity">
+                        <input type="text" name="TypeOfEntity" id="TypeOfEntity">
                     </div>
                     <div class="formModule--section">
                         <label for="CompanyName">Название компании</label>
-                        <input type="text" id="CompanyName">
+                        <input type="text" name="CompanyName" id="CompanyName">
                     </div>
                     <div class="formModule--section">
                         <label for="AddressLegal">Юридический адрес</label>
-                        <input type="text" id="AddressLegal">
+                        <input type="text" name="AddressLegal" id="AddressLegal">
                     </div>
                     <div class="formModule--section">
                         <label for="AddressActual">Фактический адрес</label>
-                        <input type="text" id="AddressActual">
+                        <input type="text" name="AddressActual" id="AddressActual">
                     </div>
                     <div class="formModule--section">
                         <label for="CountryOfIncorporation">Страна регистрации</label>
-                        <div class="dropdown dropdown-select">
+                        <div class="">
                             <select name="CountryOfIncorporationName" id="CountryOfIncorporation">
                                 <option value="0">Выберите одно</option>
                             </select>
@@ -63,59 +84,59 @@
                     </div>
                     <div class="formModule--section">
                         <label for="PrimaryContactName">Имя основного контакта</label>
-                        <input type="text" id="PrimaryContactName">
+                        <input type="text" name="PrimaryContactName" id="PrimaryContactName">
                     </div>
                     <div class="formModule--section">
                         <label for="PrimaryJobTitle">Должность основного контакта</label>
-                        <input type="text" id="PrimaryJobTitle">
+                        <input type="text" name="PrimaryJobTitle" id="PrimaryJobTitle">
                     </div>
                     <div class="formModule--section">
                         <label for="PrimaryContactPhone">Телефон основного контакта</label>
-                        <input type="number" id="PrimaryContactPhone">
+                        <input type="number" name="PrimaryContactPhone" id="PrimaryContactPhone">
                     </div>
                     <div class="formModule--section">
                         <label for="PrimaryEMail" id="PrimaryEMailLabel">Электронный адрес основного контакта</label>
-                        <input type="email" id="PrimaryEMail" required>
+                        <input type="email" name="PrimaryEMail" id="PrimaryEMail" required>
                         <span class="field-validation-error" id="invalidPrimaryEmail"></span>
                     </div>
                     <div class="formModule--section">
                         <label for="SecondaryContactName">Имя дополнительного контакта</label>
-                        <input type="text" id="SecondaryContactName">
+                        <input type="text" name="SecondaryContactName" id="SecondaryContactName">
                     </div>
                     <div class="formModule--section">
                         <label for="SecondaryJobTitle">Должность дополнительного контакта</label>
-                        <input type="text" id="SecondaryJobTitle">
+                        <input type="text" name="SecondaryJobTitle" id="SecondaryJobTitle">
                     </div>
                     <div class="formModule--section">
                         <label for="SecondaryContactPhone">Телефон дополнительного контакта</label>
-                        <input type="number" id="SecondaryContactPhone">
+                        <input type="number" name="SecondaryContactPhone" id="SecondaryContactPhone">
                     </div>
                     <div class="formModule--section">
                         <label for="SecondaryEMail">Электронный адрес дополнительного контакта</label>
-                        <input type="email" id="SecondaryEMail" required>
+                        <input type="email" name="SecondaryEMail" id="SecondaryEMail" required>
                         <span id="invalidSecondaryEmail"></span>
                     </div>
                     <div class="formModule--section">
                         <label for="RussianGovernment">Доля государственной
                             собственности в %</label>
-                        <input type="number" id="RussianGovernment" maxlength="3">
+                        <input type="number" name="RussianGovernment" id="RussianGovernment" maxlength="3">
                     </div>
                     <div class="formModule--section">
                         <label for="RussiansCitizens">Доля собственности граждан РФ в %</label>
-                        <input type="number" id="RussiansCitizens" maxlength="3">
+                        <input type="number" name="RussiansCitizens" id="RussiansCitizens" maxlength="3">
                     </div>
                     <div class="formModule--section">
                         <label for="OtherRussianLegalEntity">Доля собственности
                             юридических лиц РФ в %</label>
-                        <input type="number" id="OtherRussianLegalEntity" maxlength="3">
+                        <input type="number" name="OtherRussianLegalEntity" id="OtherRussianLegalEntity" maxlength="3">
                     </div>
                     <div class="formModule--section">
                         <label for="TotalRussian">Итого РФ собственности в %</label>
-                        <input type="number" id="TotalRussian" maxlength="3">
+                        <input type="number" name="TotalRussian" id="TotalRussian" maxlength="3">
                     </div>
                     <div class="formModule--section">
                         <label for="Website">Домашняя страница</label>
-                        <input type="text" id="Website" value="http://">
+                        <input type="text" name="Website" id="Website" value="http://">
                     </div>
                     <div class="formModule--section">
                         <label for="GoodsServicesComments">Комментарии по видам
@@ -150,7 +171,7 @@
                             </select>
                         </div>
                     </div>
-                    <button class="button">Submit</button>
+                    <button class="button">Отправить</button>
                 </form>
             </div>
         </div>

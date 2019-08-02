@@ -16023,3 +16023,8 @@ ol.no-list-style li:before, ul.no-list-style li:before {
         line-height: 0
     }
 }
+
+a.mainNav--globalSelector-name:hover{
+    color: #fe000c;
+    text-decoration: none;
+}
