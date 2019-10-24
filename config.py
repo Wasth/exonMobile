@@ -9,4 +9,3 @@ class Config(object):
     MAIL_USERNAME = 'mail.exxonmobile@gmail.com'
     MAIL_PASSWORD = '79eexon1999[]'
     ADMINS = ['mail.exxonmobile@gmail.com']
-
