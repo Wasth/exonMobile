@@ -11,87 +11,62 @@ from flask import render_template, request, redirect, url_for
 from .forms import ExxonForm
 
 
-@app.route('/en')
-def en_index():
+@app.route('/<lang>', methods=['GET', 'POST'])
+def index(lang='ru'):
     form = ExxonForm()
-    return render_template('en_index.html', form=form)
-
-
-@app.route('/', methods=['GET', 'POST'])
-@app.route('/ru', methods=['GET', 'POST'])
-def ru_index():
-    form = ExxonForm()
-    return render_template('ru_index.html', form=form)
+    return render_template(lang + '_index.html', form=form)
 
 
 @app.route('/action', methods=['POST'])
 def action():
-    ITN = request.form.get('IndividualTaxNumber', None)
-    CN = request.form.get('CompanyName', None)
-    AL = request.form.get('AddressLegal', None)
-    AA = request.form.get('AddressActual', None)
-    COIN = request.form.get('CountryOfIncorporationName', None)
-    RG = request.form.get('RussianGovernment', None)
-    RC = request.form.get('RussiansCitizens', None)
-    ORLE = request.form.get('OtherRussianLegalEntity', None)
-    TR = request.form.get('TotalRussian', None)
-    WEB = request.form.get('Website', None)
-    GSCN = request.form.get('GoodsServicesCommentsName', None)
-    GSLN = request.form.get('GoodsServicesListName', None)
-    SAAN = request.form.get('ServiceAreaAvailableName', None)
-    ACN = request.form.get('AnnualCashflowName', None)
+    fields_names = (
+        'IndividualTaxNumber',
+        'TypeOfEntity',
+        'CompanyName',
+        'AddressLegal',
+        'AddressActual',
+        'CountryOfIncorporationName',
+        'RussianGovernment',
+        'RussiansCitizens',
+        'OtherRussianLegalEntity',
+        'TotalRussian',
+        'Website',
+        'GoodsServicesCommentsName',
+        'GoodsServicesListName',
+        'ServiceAreaAvailableName',
+        'AnnualCashflowName',
+        'PrimaryContactName',
+        'PrimaryJobTitle',
+        'PrimaryContactPhone',
+        'PrimaryEMail',
+        'SecondaryContactName',
+        'SecondaryJobTitle',
+        'SecondaryContactPhone',
+        'SecondaryEMail',
+    )
 
-    PCN = request.form.get('PrimaryContactName', None)
-    PJT = request.form.get('PrimaryJobTitle', None)
-    PCP = request.form.get('PrimaryContactPhone', None)
-    PE = request.form.get('PrimaryEMail', None)
+    fields_values = {}
+    for field in fields_names:
+        fields_values.update(field, request.form.get(field, None))
 
-    SCN = request.form.get('SecondaryContactName', None)
-    SJT = request.form.get('SecondaryJobTitle', None)
-    SCP = request.form.get('SecondaryContactPhone', None)
-    SE = request.form.get('SecondaryEMail', None)
+    fields_values['Date'] = strftime("%Y-%m-%d %H:%M:%S", gmtime())
 
-    mess_arr = [{
-        'PrimaryContactName': PCN,
-        'PrimaryJobTitle': PJT,
-        'PrimaryContactPhone': PCP,
-        'PrimaryEMail': PE,
+    mess_arr = [fields_values]
 
-        'SecondaryContactName': SCN,
-        'SecondaryJobTitle': SJT,
-        'SecondaryContactPhone': SCP,
-        'SecondaryEMail': SE,
-
-        'IndividualTaxNumber': ITN,
-        'CompanyName': CN,
-        'AddressLegal': AL,
-        'AddressActual': AA,
-        'CountryOfIncorporationName': COIN,
-        'RussianGovernment': RG,
-        'RussiansCitizens': RC,
-        'OtherRussianLegalEntity': ORLE,
-        'OwnershipByNonRussian': TR,
-        'Website': WEB,
-        'GoodsServicesCommentsName': GSCN,
-        'GoodsServicesListName': GSLN,
-        'ServiceAreaAvailableName': SAAN,
-        'AnnualCashflowName': ACN,
-        'Date': strftime("%Y-%m-%d %H:%M:%S", gmtime())
-    }]
-    filename = '{}.json'.format(PCN + '_' + CN)
+    filename = '{}.json'.format(fields_values['PrimaryContactPhone'] + '_' + fields_values['CompanyName'])
 
     with open(filename, 'w') as file:
         json.dump(mess_arr, file, indent=2, ensure_ascii=False)
 
     sender = app.config['ADMINS'][0]
-    receiver = PE.split()[0]
+    receiver = fields_values['PrimaryEMail'].split()[0]
 
     message = MIMEMultipart()
     message["From"] = receiver
     message["To"] = sender
     message["Subject"] = 'Blank {}'.format(strftime("%Y-%m-%d %H:%M:%S", gmtime()))
 
-    body = 'Blank {}'.format(PCN + ' ' + CN)
+    body = 'Blank {}'.format(fields_values['PrimaryContactPhone'] + ' ' + fields_values['CompanyName'])
     message.attach(MIMEText(body, "plain"))
 
     with open(filename, "rb") as attachment:
@@ -115,4 +90,4 @@ def action():
     else:
         print('Sent')
 
-    return redirect(url_for('ru_index'))
+    return redirect(url_for('index'))
