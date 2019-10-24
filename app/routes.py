@@ -15,7 +15,6 @@ from .forms import ExxonForm
 @app.route('/', methods=['GET', 'POST'])
 def index(lang='ru'):
     form = ExxonForm()
-    print(lang)
     return render_template(lang + '_index.html', form=form)
 
 
