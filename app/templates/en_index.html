@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="Content-type" content="text/html; charset=utf-8">
     <title>Registration of potential contractors Exxon Neftegas Limited</title>
-    <link href="{{ url_for('static', filename='styles.css') }}" rel="stylesheet">
+    <link href="{{ url_for('static', filename='new_style.css') }}" rel="stylesheet">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
           integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 </head>
@@ -54,64 +54,73 @@
             <div class="formModule--form">
                 <h4>Contact information</h4>
                 <form action="{{ url_for('action') }}" method="post" novalidate>
+                    {{ form.csrf_token }}
                     <div class="formModule--section">
-                        <label for="PrimaryContactName">Name</label>
-                        <input type="text" name="PrimaryContactName" id="PrimaryContactName">
+                        <label for="PrimaryContactName">Name <span class="required">*</span></label>
+                        {{ form.PrimaryContactName }}
                     </div>
                     <div class="formModule--section">
-                        <label for="PrimaryJobTitle">Job Title</label>
-                        <input type="text" name="PrimaryJobTitle" id="PrimaryJobTitle">
+                        <label for="PrimaryJobTitle">Job Title <span class="required">*</span></label>
+                        {{ form.PrimaryJobTitle }}
                     </div>
                     <div class="formModule--section">
-                        <label for="PrimaryContactPhone">Phone</label>
-                        <input type="number" name="PrimaryContactPhone" id="PrimaryContactPhone">
+                        <label for="PrimaryContactPhone">Phone <span class="required">*</span></label>
+                        {{ form.PrimaryContactPhone }}
+                        {% for error in form.PrimaryContactPhone.errors %}
+                            <span class="field-validation-error">{{ error }}</span>
+                        {% endfor %}
                     </div>
                     <div class="formModule--section">
-                        <label for="PrimaryEMail" id="PrimaryEMailLabel">E-mail</label>
-                        <input type="email" id="PrimaryEMail" required>
+                        <label for="PrimaryEMail" id="PrimaryEMailLabel">E-mail <span class="required">*</span></label>
+                        {{ form.PrimaryEMail }}
                         <span class="field-validation-error" id="invalidPrimaryEmail"></span>
+                        {% for error in form.PrimaryEMail.errors %}
+                            <span class="field-validation-error">{{ error }}</span>
+                        {% endfor %}
                     </div>
                     <h4>Secondary contact information</h4>
                     <div class="formModule--section">
                         <label for="SecondaryContactName">Name</label>
-                        <input type="text" name="SecondaryContactName" id="SecondaryContactName">
+                        {{ form.SecondaryContactName }}
                     </div>
                     <div class="formModule--section">
                         <label for="SecondaryJobTitle">Job Title</label>
-                        <input type="text" name="SecondaryJobTitle" id="SecondaryJobTitle">
+                        {{ form.SecondaryJobTitle }}
                     </div>
                     <div class="formModule--section">
                         <label for="SecondaryContactPhone">Phone</label>
-                        <input type="number" name="SecondaryContactPhone" id="SecondaryContactPhone">
+                        {{ form.SecondaryContactPhone }}
                     </div>
                     <div class="formModule--section">
                         <label for="SecondaryEMail">E-mail</label>
-                        <input type="email" id="SecondaryEMail" required>
+                        {{ form.SecondaryEMail }}
                         <span id="invalidSecondaryEmail"></span>
+                        {% for error in form.SecondaryEMail.errors %}
+                            <span class="field-validation-error">{{ error }}</span>
+                        {% endfor %}
                     </div>
                     <h4>Company information</h4>
                     <div class="formModule--section">
-                        <label for="IndividualTaxNumber">Individual Tax Number</label>
-                        <input type="text" id="IndividualTaxNumber" name="IndividualTaxNumber" maxlength="12">
+                        <label for="IndividualTaxNumber">Individual Tax Number <span class="required">*</span></label>
+                        {{ form.IndividualTaxNumber }}
+                        {% for error in form.IndividualTaxNumber.errors %}
+                            <span class="field-validation-error">{{ error }}</span>
+                        {% endfor %}
                     </div>
                     <div class="formModule--section">
-                        <label for="TypeOfEntity">Type of entity</label>
-                        <input type="text" name="TypeOfEntity" id="TypeOfEntity">
+                        <label for="CompanyName">Company Name <span class="required">*</span></label>
+                        {{ form.CompanyName }}
                     </div>
                     <div class="formModule--section">
-                        <label for="CompanyName">Company Name</label>
-                        <input type="text" name="CompanyName" id="CompanyName">
+                        <label for="AddressLegal">Address(legal) <span class="required">*</span></label>
+                        {{ form.AddressLegal }}
                     </div>
                     <div class="formModule--section">
-                        <label for="AddressLegal">Address(legal)</label>
-                        <input type="text" name="AddressLegal" id="AddressLegal">
+                        <label for="AddressActual">Address(actual) <span class="required">*</span></label>
+                        {{ form.AddressActual }}
                     </div>
                     <div class="formModule--section">
-                        <label for="AddressActual">Address(actual)</label>
-                        <input type="text" name="AddressActual" id="AddressActual">
-                    </div>
-                    <div class="formModule--section">
-                        <label for="CountryOfIncorporation">Country of Incorporation</label>
+                        <label for="CountryOfIncorporation">Country of Incorporation <span class="required">*</span></label>
                         <div class="dropdown dropdown-select">
                             <select name="CountryOfIncorporationName" onclick="selectCountryOfIncorporation()"
                                     id="CountryOfIncorporation">
@@ -368,82 +377,91 @@
                     </div>
                     <div class="formModule--section">
                         <label for="RussianGovernment">Russian Government
-                            Ownership %</label>
-                        <input type="number" name="RussianGovernment" id="RussianGovernment" maxlength="3">
+                            Ownership % <span class="required">*</span></label>
+                        {{ form.RussianGovernment(max="100", min="1", step="0.1") }}
+                        {% for error in form.RussianGovernment.errors %}
+                            <span class="field-validation-error">{{ error }}</span>
+                        {% endfor %}
                     </div>
                     <div class="formModule--section">
-                        <label for="RussiansCitizens">Russians Citizens Ownership %</label>
-                        <input type="number" name="RussiansCitizens" id="RussiansCitizens" maxlength="3">
+                        <label for="RussiansCitizens">Russians Citizens Ownership % <span class="required">*</span></label>
+                        {{ form.RussiansCitizens(max="100", min="1", step="0.1") }}
+                        {% for error in form.RussiansCitizens.errors %}
+                            <span class="field-validation-error">{{ error }}</span>
+                        {% endfor %}
                     </div>
                     <div class="formModule--section">
-                        <label for="OtherRussianLegalEntity">Other Russian Legal Entity Ownership %</label>
-                        <input type="number" name="OtherRussianLegalEntity" id="OtherRussianLegalEntity" maxlength="3">
+                        <label for="OtherRussianLegalEntity">Other Russian Legal Entity Ownership % <span class="required">*</span></label>
+                        {{ form.OtherRussianLegalEntity(max="100", min="1", step="0.1") }}
+                        {% for error in form.OtherRussianLegalEntity.errors %}
+                            <span class="field-validation-error">{{ error }}</span>
+                        {% endfor %}
                     </div>
                     <div class="formModule--section">
-                        <label for="TotalRussian">Total Russian Ownership %</label>
-                        <input type="number" name="TotalRussian" id="TotalRussian" maxlength="3">
+                        <label for="TotalRussian">Total Russian Ownership % <span class="required">*</span></label>
+                        {{ form.TotalRussian(max="100", min="1", step="0.1") }}
+                        {% for error in form.TotalRussian.errors %}
+                            <span class="field-validation-error">{{ error }}</span>
+                        {% endfor %}
                     </div>
                     <div class="formModule--section">
                         <label for="Website">Website</label>
-                        <input type="text" name="Website" id="Website" value="http://">
+                        {{ form.Website }}
                     </div>
                     <div class="formModule--section">
-                        <label for="GoodsServicesComments">Goods&Services Comments</label>
-                        <textarea name="GoodsServicesCommentsName" id="GoodsServicesComments" cols="1"
-                                  rows="5"></textarea>
+                        <label for="GoodsServicesComments">Goods&Services Comments <span class="required">*</span></label>
+                        {{ form.GoodsServicesComments }}
                     </div>
                     <div class="formModule--section">
-                        <label for="GoodsServicesList">Goods&Services from the list</label>
+                        <label for="GoodsServicesList">Goods&Services from the list <span class="required">*</span></label>
                         <div class="dropdown dropdown-select">
                             <select class="dropdown dropdown-select" onclick="selectGoodsServicesList()" name="GoodsServicesListName"
                                     id="GoodsServicesList">
                                 <option value="0">Select one</option>
-                                <option value="A"> Agriculture, forestry, hunting, fishing, and fish farming</option>
-                                                                
-                                <option value="B"> Mining</option>
-                                                                
-                                <option value="C"> Manufacturing</option>
-                                                                
-                                <option value="D"> Supply with electric energy, gas and steam</option>
-                                                                
-                                <option value="E"> Water supply; water disposal, organization of waste collection and
-                                    disposal, pollution abatement activities
-                                </option>
-                                                                
-                                <option value="F"> Building</option>
-                                                                
-                                <option value="G"> Wholesale and retail trade; vehicle repair and motorcycles</option>
-                                                                
-                                <option value="H"> Transportation and storage</option>
-                                                                
-                                <option value="I"> Hotel and food service activities</option>
-                                                                
-                                <option value="J"> Information and communications activities</option>
-                                                                
-                                <option value="K"> Financial and insurance activities</option>
-                                                                
-                                <option value="L"> Real estate business activities</option>
-                                                                
-                                <option value="M"> Professional, scientific, and technical activities</option>
-                                                                
-                                <option value="N"> Administrative activities and related additional services</option>
-                                                                
-                                <option value="O"> Public administration and military security; social Security</option>
-                                                                
-                                <option value="P"> Education</option>
-                                                                
-                                <option value="Q"> Health and social services activities</option>
-                                                                
-                                <option value="R"> Activities in the field of culture, sports, leisure and
-                                    entertainments
-                                </option>
-                                                                
-                                <option value="S"> Providing other types of services</option>
-                                                                
-                                <option value="T"> Household activities as employers; undifferentiated private household
-                                    activities for the production of goods and the provision of services for own
-                                    consumption
-                                </option>
+                                <option value="BCIS Materials (Basic, Chemicals, Intermediates, Synthetic)">BCIS Materials (Basic, Chemicals, Intermediates, Synthetic)</option>
+                                <option value="Caustic and Acids">Caustic and Acids</option>
+                                <option value="Chemical Distributors">Chemical Distributors</option>
+                                <option value="Ethylene Bulk">Ethylene Bulk</option>
+                                <option value="Industrial Gases">Industrial Gases</option>
+                                <option value="Polymer Materials">Polymer Materials</option>
+                                <option value="Process and Water Treatment">Process and Water Treatment</option>
+                                <option value="Refining Catalysts (FCC_HPC_PM)">Refining Catalysts (FCC_HPC_PM)</option>
+                                <option value="General maintenance of process area">General maintenance of process area</option>
+                                <option value="Shutdown">Shutdown</option>
+                                <option value="Civil works">Civil works</option>
+                                <option value="Inspections">Inspections</option>
+                                <option value="Coating">Coating</option>
+                                <option value="Cathodic protection">Cathodic protection</option>
+                                <option value="Pipeline repair">Pipeline repair</option>
+                                <option value="Electrical services">Electrical services</option>
+                                <option value="Tanks cleaning">Tanks cleaning</option>
+                                <option value="Floating Rigs">Floating Rigs</option>
+                                <option value="Jackup Rigs, Platform Rigs, Rig O & M">Jackup Rigs, Platform Rigs, Rig O & M</option>
+                                <option value="Land Rigs">Land Rigs</option>
+                                <option value="OCTG / Line Pipe">OCTG / Line Pipe</option>
+                                <option value="SURF / WELLHEADS">SURF / WELLHEADS</option>
+                                <option value="Cementing Services, Drilling Fluids">Cementing Services, Drilling Fluids</option>
+                                <option value="Completions, Production Testing">Completions, Production Testing</option>
+                                <option value="Directional Drilling, Mud Logging, Drill Bits">Directional Drilling, Mud Logging, Drill Bits</option>
+                                <option value=""></option>
+                                <option value=""></option>
+                                <option value=""></option>
+                                <option value=""></option>
+                                <option value=""></option>
+                                <option value=""></option>
+                                <option value=""></option>
+                                <option value=""></option>
+                                <option value=""></option>
+                                <option value=""></option>
+                                <option value=""></option>
+                                <option value=""></option>
+                                <option value=""></option>
+                                <option value=""></option>
+                                <option value=""></option>
+                                <option value=""></option>
+                                <option value=""></option>
+                                <option value=""></option>
+                                <option value=""></option>
                             </select>
                             <p class="dropdown--title"><span id="GoodsServicesListSpan"
                                                              class="dropdown-select-selected">Select one</span>
@@ -451,7 +469,7 @@
                         </div>
                     </div>
                     <div class="formModule--section">
-                        <label for="ServiceAreaAvailable">Service Area Available</label>
+                        <label for="ServiceAreaAvailable">Service Area Available <span class="required">*</span></label>
                         <div class="dropdown dropdown-select">
                             <select name="ServiceAreaAvailableName" onclick="selectServiceAreaAvailable()" id="ServiceAreaAvailable">
                                 <option value="0">Select one</option>
@@ -466,7 +484,7 @@
                         </div>
                     </div>
                     <div class="formModule--section">
-                        <label for="AnnualCashflow">Annual cashflow</label>
+                        <label for="AnnualCashflow">Annual cashflow <span class="required">*</span></label>
                         <div class="dropdown dropdown-select">
                             <select name="AnnualCashflowName" onclick="selectAnnualCashflow()" id="AnnualCashflow">
                                 <option value="0">Select one</option>
@@ -478,6 +496,19 @@
                             </p>
                         </div>
                     </div>
+                    {{ form.recaptcha }}
+                    {% for error in form.recaptcha.errors %}
+                        <span class="field-validation-error">{{ error }}</span>
+                    {% endfor %}
+                    <div class="checkboxWrapper mt-3">
+                        <label>
+                            <input type="checkbox"
+                                   name="AgreeToTermsAndConditionsAndOurPrivacyPolicy"
+                                   value="AgreeToTermsAndConditionsAndOurPrivacyPolicy" data-sc-tracking="True"
+                                   data-sc-field-name="section_interest" required>
+                                <span>Соглашаетесь с <span class="policy" id="policy">условиями и нашей политикой конфиденциальности</span>.</span>
+                        </label>
+                    </div>
                     <button class="button">Submit</button>
                 </form>
             </div>
@@ -485,76 +516,7 @@
     </section>
 </main>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-<script>
-    let clickAC = 0, clickCOI = 0, clickGS = 0, clickSAA = 0;
-    $('#PrimaryEMail').on('blur', function () {
-        let email = $(this).val();
-        let text = 'Please enter a valid email address.';
-        if (email.length > 0
-            && (email.match(/.+?\@.+/g) || []).length !== 1) {
-            console.log('invalid');
-            document.getElementById('invalidPrimaryEmail').innerHTML = text;
-            $('#PrimaryEMail').css("border-left", "3px solid #d5000a");
-            $('#PrimaryEMailLabel').css("color", "#d5000a")
-        } else {
-            console.log('valid');
-        }
-    });
-
-    function selectAnnualCashflow() {
-        let chceck = $('#AnnualCashflow :selected');
-        if (clickAC === 0) {
-            clickAC++;
-            console.log(chceck.val());
-        } else {
-            clickAC--;
-            document.getElementById('AnnualCashflowSpan').innerHTML = chceck[0].innerText;
-        }
-    }
-
-    function selectServiceAreaAvailable() {
-        let chceck = $('#ServiceAreaAvailable :selected');
-        if (clickSAA === 0) {
-            clickSAA++;
-            console.log(chceck.val());
-        } else {
-            clickSAA--;
-            document.getElementById('ServiceAreaAvailableSpan').innerHTML = chceck[0].innerText;
-        }
-    }
-
-    function selectGoodsServicesList() {
-        let chceck = $('#GoodsServicesList :selected');
-        if (clickGS === 0) {
-            clickGS++;
-            console.log(chceck.val());
-        } else {
-            clickGS--;
-            document.getElementById('GoodsServicesListSpan').innerHTML = chceck[0].innerText;
-        }
-    }
-
-    function selectCountryOfIncorporation() {
-        let chceck = $('#CountryOfIncorporation :selected');
-        if (clickCOI === 0) {
-            clickCOI++;
-            console.log(chceck.val());
-        } else {
-            clickCOI--;
-            document.getElementById('CountryOfIncorporationSpan').innerHTML = chceck[0].innerText;
-        }
-    }
-
-    $("#PrimaryContactPhone").keypress(function (event) {
-        event = event || window.event;
-        if (event.charCode && event.charCode != 0 && event.charCode != 46 && (event.charCode < 48 || event.charCode > 57))
-            return false;
-    });
-    $("#SecondaryContactPhone").keypress(function (event) {
-        event = event || window.event;
-        if (event.charCode && event.charCode != 0 && event.charCode != 46 && (event.charCode < 48 || event.charCode > 57))
-            return false;
-    });
-</script>
+<script src="{{ url_for('static', filename='scripts.js') }}"></script>
+<script src="{{ url_for('static', filename='jquery.maskedinput.min.js') }}"></script>
 </body>
 </html>
